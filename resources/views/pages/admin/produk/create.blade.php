@@ -25,109 +25,87 @@
             <form action="{{ route('produk.store') }}" method="POST">
                 @csrf
 
-                <!-- Nama Produk -->
-                <div class="form-group">
-                    <label>Nama Produk</label>
-                    <input type="text" name="nama_produk" 
-                           value="{{ old('nama_produk') }}" 
-                           required
-                           class="@error('nama_produk') is-invalid @enderror">
-                    @error('nama_produk')
-                        <small class="error">{{ $message }}</small>
-                    @enderror
+                <div class="form-grid">
+                    <!-- Nama Produk -->
+                    <div class="form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" name="nama_produk" value="{{ old('nama_produk') }}" required
+                               class="@error('nama_produk') is-invalid @enderror">
+                        @error('nama_produk') <small class="error">{{ $message }}</small> @enderror
+                    </div>
+
+                    <!-- Supplier -->
+                    <div class="form-group">
+                        <label>Suplier</label>
+                        <select name="suplier_id" required class="@error('suplier_id') is-invalid @enderror">
+                            <option value="">-- Pilih Supplier --</option>
+                            @foreach($suplier as $sup)
+                                <option value="{{ $sup->id }}" {{ old('suplier_id') == $sup->id ? 'selected' : '' }}>
+                                    {{ $sup->nama_suplier }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('suplier_id') <small class="error">{{ $message }}</small> @enderror
+                    </div>
+
+                    <!-- Harga Beli -->
+                    <div class="form-group">
+                        <label>Harga Beli</label>
+                        <input type="number" name="harga_beli" value="{{ old('harga_beli') }}" required
+                               class="@error('harga_beli') is-invalid @enderror">
+                        @error('harga_beli') <small class="error">{{ $message }}</small> @enderror
+                    </div>
+
+                    <!-- Harga Jual -->
+                    <div class="form-group">
+                        <label>Harga Jual</label>
+                        <input type="number" name="harga_jual" value="{{ old('harga_jual') }}" required
+                               class="@error('harga_jual') is-invalid @enderror">
+                        @error('harga_jual') <small class="error">{{ $message }}</small> @enderror
+                    </div>
+
+                    <!-- Satuan Unit -->
+                    <div class="form-group">
+                        <label>Satuan Unit</label>
+                        <input type="text" name="satuan_unit" value="{{ old('satuan_unit') }}" required
+                               placeholder="contoh: pcs, box, liter"
+                               class="@error('satuan_unit') is-invalid @enderror">
+                        @error('satuan_unit') <small class="error">{{ $message }}</small> @enderror
+                    </div>
+
+                    <!-- Stok Awal -->
+                    <div class="form-group">
+                        <label>Stok Awal</label>
+                        <input type="number" name="stok_awal" value="{{ old('stok_awal') }}" required
+                               class="@error('stok_awal') is-invalid @enderror">
+                        @error('stok_awal') <small class="error">{{ $message }}</small> @enderror
+                    </div>
+
+                    <!-- Stok Minimum -->
+                    <div class="form-group">
+                        <label>Stok Minimum</label>
+                        <input type="number" name="stok_minimum" value="{{ old('stok_minimum') }}" required
+                               class="@error('stok_minimum') is-invalid @enderror">
+                        @error('stok_minimum') <small class="error">{{ $message }}</small> @enderror
+                    </div>
+
+                    <!-- Kategori -->
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <select name="kategori_id" required class="@error('kategori_id') is-invalid @enderror">
+                            <option value="">-- Pilih Kategori --</option>
+                            @foreach($kategori as $k)
+                                <option value="{{ $k->id }}" {{ old('kategori_id') == $k->id ? 'selected' : '' }}>
+                                    {{ $k->kategori }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('kategori_id') <small class="error">{{ $message }}</small> @enderror
+                    </div>
                 </div>
 
-                <!-- Harga Beli -->
-                <div class="form-group">
-                    <label>Harga Beli</label>
-                    <input type="number" name="harga_beli" 
-                           value="{{ old('harga_beli') }}" 
-                           required
-                           class="@error('harga_beli') is-invalid @enderror">
-                    @error('harga_beli')
-                        <small class="error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Harga Jual -->
-                <div class="form-group">
-                    <label>Harga Jual</label>
-                    <input type="number" name="harga_jual" 
-                           value="{{ old('harga_jual') }}" 
-                           required
-                           class="@error('harga_jual') is-invalid @enderror">
-                    @error('harga_jual')
-                        <small class="error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Satuan Unit -->
-                <div class="form-group">
-                    <label>Satuan Unit</label>
-                    <input type="text" name="satuan_unit" 
-                           value="{{ old('satuan_unit') }}" 
-                           placeholder="contoh: pcs, box, liter"
-                           required
-                           class="@error('satuan_unit') is-invalid @enderror">
-                    @error('satuan_unit')
-                        <small class="error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Stok Awal -->
-                <div class="form-group">
-                    <label>Stok Awal</label>
-                    <input type="number" name="stok_awal" 
-                           value="{{ old('stok_awal') }}" 
-                           required
-                           class="@error('stok_awal') is-invalid @enderror">
-                    @error('stok_awal')
-                        <small class="error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Stok Minimum -->
-                <div class="form-group">
-                    <label>Stok Minimum</label>
-                    <input type="number" name="stok_minimum" 
-                           value="{{ old('stok_minimum') }}" 
-                           required
-                           class="@error('stok_minimum') is-invalid @enderror">
-                    @error('stok_minimum')
-                        <small class="error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <!-- Kategori -->
-                <div class="form-group">
-                    <label>Kategori</label>
-                    <select name="kategori_id" required class="@error('kategori_id') is-invalid @enderror">
-                        <option value="">-- Pilih Kategori --</option>
-                        @foreach($kategori as $k)
-                            <option value="{{ $k->id }}" {{ old('kategori_id') == $k->id ? 'selected' : '' }}>
-                                {{ $k->kategori }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('kategori_id')
-                        <small class="error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                 {{-- Supplier --}}
-          <div class="form-group mb-4">
-            <label for="suplier_id" class="form-label">Suplier</label>
-            <select name="suplier_id" id="suplier_id" class="form-control" required>
-              <option value="">-- Pilih Supplier --</option>
-              @foreach($suplier as $sup)
-                <option value="{{ $sup->id }}" {{ old('supplier_id') == $sup->id ? 'selected' : '' }}>
-                  {{ $sup->nama_suplier }}
-                </option>
-              @endforeach
-            </select>
-          </div>
                 <!-- Submit -->
-                <div class="form-group">
+                <div class="form-group mt-3">
                     <button type="submit" class="btn-primary">💾 Simpan</button>
                 </div>
             </form>
@@ -135,7 +113,6 @@
     </div>
 </div>
 
-{{-- CSS + JS inline agar konsep sama --}}
 <style>
     .page-header { margin-bottom: 20px; }
     .page-header h2 { font-size: 1.6rem; font-weight: bold; }
@@ -148,8 +125,10 @@
     .card-header h4 { margin: 0; font-size: 1.2rem; }
     .card-body { padding: 20px; }
 
-    .form-group { margin-bottom: 15px; }
-    .form-group label { font-weight: 600; display: block; margin-bottom: 6px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+    .form-group { display: flex; flex-direction: column; }
+    .form-group label { font-weight: 600; margin-bottom: 6px; }
     .form-group input, .form-group select, .form-group textarea {
         width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;
         transition: all 0.2s ease;

@@ -5,6 +5,7 @@
 @section('content')
 <div class="container mt-4">
     <h2 class="mb-4">📦 Daftar Suplier</h2>
+    <br>
 
     <!-- Tombol tambah -->
     <div class="mb-3">
@@ -33,6 +34,7 @@
                     <td class="actions">
                         <a href="{{ route('suplier.edit', $supliers->id) }}" class="btn-edit">✏️ Edit</a>
                         <form action="{{ route('suplier.destroy', $supliers->id) }}" method="POST" class="d-inline">
+                            <br>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn-delete" onclick="return confirm('Yakin mau hapus?')">🗑️ Hapus</button>

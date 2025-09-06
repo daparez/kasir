@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaksi extends Model
 {
-     protected $table = "transaksii";
-    protected $fillable = ['produk_id', 'jumlah', 'total'];
-
-    public function produk()
-    {
-        return $this->belongsTo(Produk::class);
-    }
+    use HasFactory;
     
+    protected $table = 'transaksii';
+
+    protected $fillable = ['total_harga'];
+
+    public function details()
+    {
+        return $this->hasMany(DetailTransaksi::class);
+    }
 }

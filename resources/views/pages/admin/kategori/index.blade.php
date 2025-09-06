@@ -4,17 +4,17 @@
 
 @section('content')
 <div class="kategori-page">
-    <div class="card">
+    <div class="card" data-aos="fade-up">
         <div class="card-header">
             <h2>📚 Daftar Kategori</h2>
-            <a href="{{ route('kategori.create') }}" class="btn-add">
+            <button type="button" id="btnTambah" class="btn-add">
                 + Tambah Kategori
-            </a>
+            </button>
         </div>
 
         <div class="card-body">
             @if(session('success'))
-                <div class="alert">
+                <div class="alert" data-aos="fade-down">
                     ✅ {{ session('success') }}
                 </div>
             @endif
@@ -56,22 +56,33 @@
     </div>
 </div>
 
+{{-- STYLE --}}
 <style>
+    body {
+        background: #f6f9fc;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
     .kategori-page {
         margin-top: 30px;
     }
 
     .card {
         background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        border-radius: 18px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         overflow: hidden;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
     }
 
     .card-header {
-        background: linear-gradient(135deg, #3498db, #2980b9);
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
         color: white;
-        padding: 20px;
+        padding: 22px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -79,21 +90,26 @@
 
     .card-header h2 {
         margin: 0;
-        font-size: 20px;
+        font-size: 22px;
+        font-weight: 600;
     }
 
     .btn-add {
-        background: #fff;
-        color: #3498db;
-        padding: 8px 16px;
-        border-radius: 20px;
+        background: white;
+        color: #2575fc;
+        padding: 8px 18px;
+        border-radius: 25px;
         font-weight: bold;
         text-decoration: none;
-        transition: all 0.2s;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        cursor: pointer;
+        border: none;
     }
 
     .btn-add:hover {
-        background: #ecf0f1;
+        background: #f0f4ff;
+        transform: scale(1.05);
     }
 
     .card-body {
@@ -101,11 +117,13 @@
     }
 
     .alert {
-        background: #2ecc71;
+        background: linear-gradient(135deg, #00b09b, #96c93d);
         color: white;
-        padding: 10px 15px;
+        padding: 12px 18px;
         border-radius: 12px;
         margin-bottom: 15px;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .table-container {
@@ -116,6 +134,8 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 10px;
+        border-radius: 12px;
+        overflow: hidden;
     }
 
     thead {
@@ -124,32 +144,35 @@
     }
 
     thead th {
-        padding: 12px;
-        font-weight: bold;
+        padding: 14px;
+        font-weight: 600;
         text-align: center;
     }
 
     tbody td {
-        padding: 12px;
+        padding: 14px;
         text-align: center;
         border-bottom: 1px solid #ecf0f1;
+        color: #333;
+        font-size: 15px;
     }
 
     tbody tr:hover {
-        background: #f9f9f9;
+        background: #f8faff;
     }
 
     /* Tombol */
     .btn-warning,
     .btn-danger {
-        padding: 6px 14px;
-        border-radius: 20px;
+        padding: 7px 16px;
+        border-radius: 22px;
         font-size: 14px;
         font-weight: bold;
         cursor: pointer;
         text-decoration: none;
         border: none;
-        transition: all 0.2s;
+        transition: all 0.25s ease;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
     }
 
     .btn-warning {
@@ -159,6 +182,7 @@
 
     .btn-warning:hover {
         background: #e67e22;
+        transform: translateY(-2px);
     }
 
     .btn-danger {
@@ -168,6 +192,7 @@
 
     .btn-danger:hover {
         background: #c0392b;
+        transform: translateY(-2px);
     }
 
     .hidden {
@@ -175,8 +200,10 @@
     }
 </style>
 
+{{-- SCRIPT --}}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        // tombol hapus
         document.querySelectorAll(".btn-hapus").forEach(btn => {
             btn.addEventListener("click", function () {
                 if (confirm("Apakah yakin akan dihapus?")) {
@@ -187,6 +214,21 @@
                 }
             });
         });
+
+        // tombol tambah kategori tanpa reload server
+        document.getElementById("btnTambah").addEventListener("click", function () {
+            window.location = "{{ route('kategori.create') }}";
+        });
+    });
+</script>
+
+{{-- Tambah animasi AOS --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 600,
+        once: true
     });
 </script>
 @endsection

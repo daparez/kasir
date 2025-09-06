@@ -13,8 +13,8 @@
                     <i class="fas fa-users"></i>
                 </div>
                 <div class="details">
-                    <h3>Jumlah Anggota</h3>
-                    <p>120</p>
+                    <h3>Jumlah suplier</h3>
+                    <p></p>
                 </div>
             </div>
 

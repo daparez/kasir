@@ -4,26 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
-     Schema::create('transaksii', function (Blueprint $table) {
+        Schema::create('transaksii', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produk_id')->constrained('produk')->onDelete('cascade');
-            $table->integer('jumlah');
-            $table->decimal('total', 12, 2);
+            $table->decimal('total_harga', 15, 2)->default(0);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-     public function down(): void
+
+    public function down(): void
     {
         Schema::dropIfExists('transaksii');
     }

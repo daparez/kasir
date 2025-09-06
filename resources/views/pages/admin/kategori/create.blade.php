@@ -14,14 +14,14 @@
     </div>
 
     <!-- Card -->
-    <div class="card">
+    <div class="card" data-aos="fade-up">
         <div class="card-header">
             <h4>Form Kategori</h4>
-            <a href="{{ route('kategori.index') }}" class="btn-danger">Kembali</a>
+            <a href="javascript:void(0);" onclick="history.back();" class="btn-danger">⬅ Kembali</a>
         </div>
 
         <div class="card-body">
-            <form action="{{ route('kategori.store') }}" method="POST">
+            <form action="{{ route('kategori.store') }}" method="POST" id="kategoriForm">
                 @csrf
                 <div class="form-group">
                     <label>Nama Kategori </label>
@@ -72,6 +72,7 @@
         border-radius: 16px;
         box-shadow: 0 6px 20px rgba(0,0,0,0.08);
         overflow: hidden;
+        animation: fadeInUp 0.4s ease-in-out;
     }
 
     .card-header {
@@ -150,6 +151,17 @@
 
     .btn-danger:hover {
         background: #c0392b;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 </style>
 @endsection

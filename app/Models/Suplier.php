@@ -18,6 +18,6 @@ class Suplier extends Model
 
     public function product()
 {
-    return $this->hasMany(Product::class);
+    return $this->hasMany(Produk::class);
 }
 }

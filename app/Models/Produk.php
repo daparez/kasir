@@ -31,4 +31,9 @@ public function suplier()
     {
         return $this->belongsTo(Suplier::class, 'suplier_id');
     }
+
+    public function detailTransaksi()
+{
+    return $this->hasMany(DetailTransaksi::class, 'produk_id');
+}
 }
